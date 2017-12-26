@@ -7,7 +7,7 @@ var configs = {
 var express = require("express");
 var wechat = require("wechat");
 var app = express();
-var port = "8080";
+var port = "80";
 
 app.use("/wechat", wechat("token", function(req, res, next) {}));
 app.listen(port, "0.0.0.0", err => {
