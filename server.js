@@ -7,7 +7,7 @@ var configs = {
 var express = require("express");
 var wechat = require("wechat");
 var app = express();
-var port = "8080";
+var port = "80";
 
 app.get("/test", function(req, res) {
   res.send("hello world");
