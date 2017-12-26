@@ -7,9 +7,12 @@ var configs = {
 var express = require("express");
 var wechat = require("wechat");
 var app = express();
-var port = "80";
+var port = "8080";
 
-app.use("/wechat", wechat("token", function(req, res, next) {}));
+app.get("/test", function() {
+  return "test";
+});
+// app.use("/wechat", wechat("token", function(req, res, next) {}));
 app.listen(port, "0.0.0.0", err => {
   if (err) {
     console.error(err);
