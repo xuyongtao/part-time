@@ -8,8 +8,8 @@ var menu = {
   button: [
     {
       type: "click",
-      name: "今日歌曲",
-      key: "V1001_TODAY_MUSIC"
+      name: "免费领书",
+      key: "get_book"
     },
     {
       name: "菜单",
@@ -43,9 +43,11 @@ app.get("/test", function(req, res) {
 app.use(
   "/wechat",
   wechat("token", function(req, res, next) {
-    api.createMenu(menu, function() {
-      console.log(arguments);
-    });
+    console.log("res: ", res);
+
+    // api.createMenu(menu, function() {
+    //   console.log(arguments);
+    // });
   })
 );
 
