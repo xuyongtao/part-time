@@ -4,7 +4,7 @@ var configs = {
   token: "mytoken"
 };
 
-var menus = {
+var menu = {
   button: [
     {
       type: "click",
