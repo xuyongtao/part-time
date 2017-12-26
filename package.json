@@ -1,0 +1,24 @@
+{
+  "name": "part-time",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuyongtao/part-time.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xuyongtao/part-time/issues"
+  },
+  "homepage": "https://github.com/xuyongtao/part-time#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "wechat": "^2.1.0",
+    "wechat-api": "^1.35.1"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "part-time",
+  "script": "server.js",
+  "cwd": "./",
+  "exec_mode": "fork",
+  "watch": [],
+  "env": {
+    "NODE_ENV": "production",
+    "DEBUG_SDK": "yes"
+  },
+  "env_production": {
+    "NODE_ENV": "production"
+  }
+}
