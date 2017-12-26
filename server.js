@@ -12,7 +12,7 @@ var port = "80";
 app.get("/test", function(req, res) {
   res.send("hello world");
 });
-// app.use("/wechat", wechat("token", function(req, res, next) {}));
+app.use("/wechat", wechat("token", function(req, res, next) {}));
 app.listen(port, "0.0.0.0", err => {
   if (err) {
     console.error(err);
