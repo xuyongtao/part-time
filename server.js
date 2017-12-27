@@ -61,6 +61,7 @@ app.use(
               if (err) {
                 throw err;
               } else {
+                console.log("headimgurl: " + result.headimgurl);
                 return result.headimgurl;
               }
             })
@@ -70,6 +71,7 @@ app.use(
                 if (err) {
                   throw err;
                 } else {
+                  console.log("mediaId: " + result.media_id);
                   return result.media_id;
                 }
               });
