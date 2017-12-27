@@ -46,15 +46,12 @@ app.use(express.static(path.join(__dirname, "../assets"), { maxAge: 2592000000 }
 app.use(
   "/wechat",
   wechat("token", function(req, res, next) {
-    Promise.resolve(
-      api.createMenu(menu, (err, result) => {
-        if (err) {
-          throw err;
-        }
-      })
-    ).then(() => {
-      console.log("req: ", req.body.weixin);
+    api.createMenu(menu, function(err, result) {
+      err && console.log("创建菜单失败");
     });
+    console.log("req: ", req);
+    console.log("req body: ", req.body);
+    console.log("weixin: ", req.body.weixin);
   })
 );
 
