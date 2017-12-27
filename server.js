@@ -115,13 +115,21 @@ app.use(
           //   }
           // });
         } else if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "user_like") {
-          api.sendText(userOpenId, "您的支持是我们的无限动力", function(err, result) {
-            if (err) {
+          new Promise((resolve, reject) => {
+            api.sendText(userOpenId, "您的支持是我们的无限动力", function(err, result) {
+              if (err) {
+                reject(err);
+              } else {
+                resolve();
+              }
+            });
+          })
+            .fail(err => {
               console.log(err);
-            } else {
+            })
+            .handle(() => {
               res.send("success");
-            }
-          });
+            });
         } else {
           res.send("success");
         }
