@@ -66,29 +66,29 @@ app.use(
               }
             });
           })
-            .then(headimgurl => {
-              console.log("outter headimgurl: " + headimgurl);
+            // .then(headimgurl => {
+            //   console.log("outter headimgurl: " + headimgurl);
 
-              return new Promise((resolve, reject) => {
-                api.uploadImage(headimgurl, (err, result) => {
-                  if (err) {
-                    reject(err);
-                  } else {
-                    console.log("mediaId: " + result.media_id);
-                    resolve(result.media_id);
-                  }
-                });
-              });
-            })
-            .then(mediaId => {
-              return new Promise((resolve, reject) => {
-                api.sendImage(userOpenId, mediaId, (err, result) => {
-                  if (err) {
-                    reject(err);
-                  }
-                });
-              });
-            })
+            //   return new Promise((resolve, reject) => {
+            //     api.uploadImage(headimgurl, (err, result) => {
+            //       if (err) {
+            //         reject(err);
+            //       } else {
+            //         console.log("mediaId: " + result.media_id);
+            //         resolve(result.media_id);
+            //       }
+            //     });
+            //   });
+            // })
+            // .then(mediaId => {
+            //   return new Promise((resolve, reject) => {
+            //     api.sendImage(userOpenId, mediaId, (err, result) => {
+            //       if (err) {
+            //         reject(err);
+            //       }
+            //     });
+            //   });
+            // })
             .then(() => {
               return new Promise((resolve, reject) => {
                 api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
