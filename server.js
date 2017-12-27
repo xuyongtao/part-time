@@ -56,47 +56,45 @@ app.use(
 
         if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "get_book") {
           // 获取用户的基本信息
-          Promise.then(
-            api.getUser({ openid: userOpenId, lang: "zh_CN" }, (err, result) => {
-              if (err) {
-                throw err;
-              } else {
-                return Promise.resolve(result.headimgurl);
-              }
-            })
-          )
-            .then(headimgurl => {
-              console.log("headimgurl: " + result.headimgurl);
+          api.getUser({ openid: userOpenId, lang: "zh_CN" }, (err, result) => {
+            if (err) {
+              throw err;
+            } else {
+              return Promise.resolve(result.headimgurl)
+                .then(headimgurl => {
+                  console.log("headimgurl: " + result.headimgurl);
 
-              api.uploadMedia(headimgurl, "image", (err, result) => {
-                if (err) {
-                  throw err;
-                } else {
-                  console.log("mediaId: " + result.media_id);
-                  return result.media_id;
-                }
-              });
-            })
-            .then(mediaId => {
-              api.sendImage(userOpenId, mediaId, (err, result) => {
-                if (err) {
-                  throw err;
-                }
-              });
-            })
-            .then(() => {
-              api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
-                if (err) {
-                  throw err;
-                }
-              });
-            })
-            .fail(err => {
-              console.log(err);
-            })
-            .handle(() => {
-              res.send("success");
-            });
+                  api.uploadMedia(headimgurl, "image", (err, result) => {
+                    if (err) {
+                      throw err;
+                    } else {
+                      console.log("mediaId: " + result.media_id);
+                      return result.media_id;
+                    }
+                  });
+                })
+                .then(mediaId => {
+                  api.sendImage(userOpenId, mediaId, (err, result) => {
+                    if (err) {
+                      throw err;
+                    }
+                  });
+                })
+                .then(() => {
+                  api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
+                    if (err) {
+                      throw err;
+                    }
+                  });
+                })
+                .fail(err => {
+                  console.log(err);
+                })
+                .handle(() => {
+                  res.send("success");
+                });
+            }
+          });
 
           // api.sendText(userOpenId, "功能正在开发中.....", function(err, result) {
           //   if (err) {
