@@ -29,6 +29,7 @@ var menu = {
   ]
 };
 
+var path = require("path");
 var express = require("express");
 var wechat = require("wechat");
 var wechatApi = require("wechat-api");
