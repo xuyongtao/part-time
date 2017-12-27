@@ -67,10 +67,10 @@ app.use(
             });
           })
             .then(headimgurl => {
-              console.log("outter headimgurl: " + result.headimgurl);
+              console.log("outter headimgurl: " + headimgurl);
 
               return new Promise((resolve, reject) => {
-                api.uploadMedia(headimgurl, "image", (err, result) => {
+                api.uploadImage(headimgurl, (err, result) => {
                   if (err) {
                     reject(err);
                   } else {
