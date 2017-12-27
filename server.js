@@ -61,7 +61,7 @@ app.use(
               if (err) {
                 throw err;
               } else {
-                return result.headimgurl;
+                return Promise.resolve(result.headimgurl);
               }
             })
           )
