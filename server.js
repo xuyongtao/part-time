@@ -51,8 +51,7 @@ app.use(
         console.log("创建菜单失败");
       } else {
         console.log("req: ", req);
-        console.log("req body: ", req.body);
-        console.log("weixin: ", req.body.weixin);
+        console.log("req weixin: ", req.weixin);
       }
     });
   })
