@@ -57,7 +57,7 @@ app.use(
         if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "get_book") {
           // 获取用户的基本信息
           Promise.resolve(
-            api.getUser({ userOpenId, lang: "zh_CN" }, (err, result) => {
+            api.getUser({ openid: userOpenId, lang: "zh_CN" }, (err, result) => {
               if (err) {
                 throw err;
               } else {
