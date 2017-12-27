@@ -61,12 +61,13 @@ app.use(
               if (err) {
                 throw err;
               } else {
-                console.log("headimgurl: " + result.headimgurl);
                 return result.headimgurl;
               }
             })
           )
             .then(headimgurl => {
+              console.log("headimgurl: " + result.headimgurl);
+
               api.uploadMedia(headimgurl, "image", (err, result) => {
                 if (err) {
                   throw err;
