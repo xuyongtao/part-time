@@ -94,6 +94,8 @@ app.use(
                 api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
                   if (err) {
                     reject(err);
+                  } else {
+                    resolve();
                   }
                 });
               });
@@ -101,9 +103,7 @@ app.use(
             .fail(err => {
               console.log(err);
             })
-            .handle(() => {
-              res.send("success");
-            });
+            .handle(res.send("success"));
 
           // api.sendText(userOpenId, "功能正在开发中.....", function(err, result) {
           //   if (err) {
