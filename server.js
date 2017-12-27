@@ -54,7 +54,7 @@ app.use(
         var A = req.weixin;
 
         if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "get_book") {
-          wechatApi.sendText(A.FromUserName, "功能正在开发中.....", function(err, result) {
+          api.sendText(A.FromUserName, "功能正在开发中.....", function(err, result) {
             if (err) {
               console.log(err);
             }
