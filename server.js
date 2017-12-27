@@ -56,40 +56,46 @@ app.use(
 
         if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "get_book") {
           // 获取用户的基本信息
-          Promise.then(
+          new Promise((resolve, reject) => {
             api.getUser({ openid: userOpenId, lang: "zh_CN" }, (err, result) => {
               if (err) {
-                throw err;
+                reject(err);
               } else {
                 console.log("inner headimgurl: " + result.headimgurl);
-                return Promise.resolve(result.headimgurl);
+                resolve(result.headimgurl);
               }
-            })
-          )
+            });
+          })
             .then(headimgurl => {
               console.log("outter headimgurl: " + result.headimgurl);
 
-              return api.uploadMedia(headimgurl, "image", (err, result) => {
-                if (err) {
-                  throw err;
-                } else {
-                  console.log("mediaId: " + result.media_id);
-                  return Promise.resolve(result.media_id);
-                }
+              return new Promise((resolve, reject) => {
+                api.uploadMedia(headimgurl, "image", (err, result) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    console.log("mediaId: " + result.media_id);
+                    resolve(result.media_id);
+                  }
+                });
               });
             })
             .then(mediaId => {
-              return api.sendImage(userOpenId, mediaId, (err, result) => {
-                if (err) {
-                  throw err;
-                }
+              return new Promise((resolve, reject) => {
+                api.sendImage(userOpenId, mediaId, (err, result) => {
+                  if (err) {
+                    reject(err);
+                  }
+                });
               });
             })
             .then(() => {
-              return api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
-                if (err) {
-                  throw err;
-                }
+              return new Promise((resolve, reject) => {
+                api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
+                  if (err) {
+                    reject(err);
+                  }
+                });
               });
             })
             .fail(err => {
