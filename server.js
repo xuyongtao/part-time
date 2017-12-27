@@ -51,10 +51,14 @@ app.use(
       if (err) {
         console.log("创建菜单失败");
       } else {
-        var wechatA = req.weixin;
+        var A = req.weixin;
 
-        if (wechatA.MsgType == "event" && wechatA.Event == "CLICK" && wechatA.EventKey == "get_book") {
-          res.send("功能正在开发中.....");
+        if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "get_book") {
+          wechatApi.sendText(A.FromUserName, "功能正在开发中.....", function(err, result) {
+            if (err) {
+              console.log(err);
+            }
+          });
         } else {
           res.send("success");
         }
