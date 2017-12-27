@@ -1,7 +1,7 @@
 var configs = {
   appID: "wx4e7341e2ae882201",
   appsecret: "86ba9b392dcef4c9436f9d2bcc14bac8",
-  token: "mytoken"
+  token: "token"
 };
 
 var menu = {
@@ -22,7 +22,7 @@ var menu = {
         {
           type: "click",
           name: "赞一下我们",
-          key: "like"
+          key: "user_like"
         }
       ]
     }
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "../assets"), { maxAge: 2592000000 }
 
 app.use(
   "/wechat",
-  wechat("token", function(req, res, next) {
+  wechat(configs.token, function(req, res, next) {
     api.createMenu(menu, function(err, result) {
       console.log("creatMenu");
       if (err) {
@@ -61,7 +61,7 @@ app.use(
               res.send("success");
             }
           });
-        } else if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "like") {
+        } else if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "user_like") {
           api.sendText(A.FromUserName, "您的支持是我们的无限动力", function(err, result) {
             if (err) {
               console.log(err);
