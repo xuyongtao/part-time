@@ -91,7 +91,7 @@ app.use(
             .fail(err => {
               console.log(err);
             })
-            .always(() => {
+            .handle(() => {
               res.send("success");
             });
 
