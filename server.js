@@ -52,17 +52,58 @@ app.use(
         console.log("创建菜单失败");
       } else {
         var A = req.weixin;
+        var userOpenId = A.FromUserName;
 
         if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "get_book") {
-          api.sendText(A.FromUserName, "功能正在开发中.....", function(err, result) {
-            if (err) {
+          // 获取用户的基本信息
+          Promise.resolve(
+            api.getUser({ userOpenId, lang: "zh_CN" }, (err, result) => {
+              if (err) {
+                throw err;
+              } else {
+                return result.headimgurl;
+              }
+            })
+          )
+            .then(headimgurl => {
+              api.uploadMedia(headimgurl, "image", (err, result) => {
+                if (err) {
+                  throw err;
+                } else {
+                  return result.media_id;
+                }
+              });
+            })
+            .then(mediaId => {
+              api.sendImage(userOpenId, mediaId, (err, result) => {
+                if (err) {
+                  throw err;
+                }
+              });
+            })
+            .then(() => {
+              api.sendText(userOpenId, "功能正在开发中.....", (err, result) => {
+                if (err) {
+                  throw err;
+                }
+              });
+            })
+            .fail(err => {
               console.log(err);
-            } else {
+            })
+            .always(() => {
               res.send("success");
-            }
-          });
+            });
+
+          // api.sendText(userOpenId, "功能正在开发中.....", function(err, result) {
+          //   if (err) {
+          //     console.log(err);
+          //   } else {
+          //     res.send("success");
+          //   }
+          // });
         } else if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "user_like") {
-          api.sendText(A.FromUserName, "您的支持是我们的无限动力", function(err, result) {
+          api.sendText(userOpenId, "您的支持是我们的无限动力", function(err, result) {
             if (err) {
               console.log(err);
             } else {
