@@ -32,22 +32,28 @@ var menu = {
 var express = require("express");
 var wechat = require("wechat");
 var wechatApi = require("wechat-api");
+var bodyParser = require("body-parser");
+var Promise = require("thenfail").default;
 var api = new wechatApi(configs.appID, configs.appsecret);
 var app = express();
 var port = "80";
 
-app.get("/test", function(req, res) {
-  res.send("hello world");
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "../assets"), { maxAge: 2592000000 }));
 
 app.use(
   "/wechat",
   wechat("token", function(req, res, next) {
-    console.log("res: ", res);
-
-    // api.createMenu(menu, function() {
-    //   console.log(arguments);
-    // });
+    Promise.resolve(
+      api.createMenu(menu, (err, result) => {
+        if (err) {
+          throw err;
+        }
+      })
+    ).then(() => {
+      console.log("req: ", req.body.weixin);
+    });
   })
 );
 
