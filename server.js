@@ -47,11 +47,17 @@ app.use(
   "/wechat",
   wechat("token", function(req, res, next) {
     api.createMenu(menu, function(err, result) {
+      console.log("creatMenu");
       if (err) {
         console.log("创建菜单失败");
       } else {
-        console.log("req: ", req);
-        console.log("req weixin: ", req.weixin);
+        var wechatA = req.weixin;
+
+        if (wechatA.MsgType == "event" && wechatA.Event == "CLICK" && wechatA.EventKey == "get_book") {
+          res.send("功能正在开发中.....");
+        } else {
+          res.send("success");
+        }
       }
     });
   })
