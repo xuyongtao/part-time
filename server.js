@@ -17,12 +17,12 @@ var menu = {
         {
           type: "view",
           name: "搜索",
-          url: "http://www.soso.com/"
+          url: "http://www.baidu.com/"
         },
         {
           type: "click",
           name: "赞一下我们",
-          key: "V1001_GOOD"
+          key: "like"
         }
       ]
     }
@@ -57,6 +57,16 @@ app.use(
           api.sendText(A.FromUserName, "功能正在开发中.....", function(err, result) {
             if (err) {
               console.log(err);
+            } else {
+              res.send("success");
+            }
+          });
+        } else if (A.MsgType == "event" && A.Event == "CLICK" && A.EventKey == "like") {
+          api.sendText(A.FromUserName, "您的支持是我们的无限动力", function(err, result) {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send("success");
             }
           });
         } else {
